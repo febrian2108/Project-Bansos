@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 22 Apr 2024 pada 15.18
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Aug 07, 2025 at 05:13 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,18 +24,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
-  `id_user` int(5) NOT NULL,
+  `id_user` int NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `nama` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id_user`, `username`, `password`, `nama`) VALUES
@@ -44,19 +44,19 @@ INSERT INTO `admin` (`id_user`, `username`, `password`, `nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `himpunan`
+-- Table structure for table `himpunan`
 --
 
 CREATE TABLE `himpunan` (
-  `id_himpunan` int(5) NOT NULL,
-  `id_kriteria` int(5) NOT NULL,
+  `id_himpunan` int NOT NULL,
+  `id_kriteria` int NOT NULL,
   `namahimpunan` varchar(100) NOT NULL,
   `nilai` varchar(100) NOT NULL,
   `keterangan` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `himpunan`
+-- Dumping data for table `himpunan`
 --
 
 INSERT INTO `himpunan` (`id_himpunan`, `id_kriteria`, `namahimpunan`, `nilai`, `keterangan`) VALUES
@@ -84,21 +84,21 @@ INSERT INTO `himpunan` (`id_himpunan`, `id_kriteria`, `namahimpunan`, `nilai`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `klasifikasi`
+-- Table structure for table `klasifikasi`
 --
 
 CREATE TABLE `klasifikasi` (
-  `id_klasifikasi` int(5) NOT NULL,
+  `id_klasifikasi` int NOT NULL,
   `id_penerima` varchar(10) DEFAULT NULL,
   `jml_tanggungan` double NOT NULL,
   `pend_terakhir` double DEFAULT NULL,
   `penghasilan_ortu` double NOT NULL,
   `kond_rumah` double DEFAULT NULL,
   `usia` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `klasifikasi`
+-- Dumping data for table `klasifikasi`
 --
 
 INSERT INTO `klasifikasi` (`id_klasifikasi`, `id_penerima`, `jml_tanggungan`, `pend_terakhir`, `penghasilan_ortu`, `kond_rumah`, `usia`) VALUES
@@ -111,7 +111,6 @@ INSERT INTO `klasifikasi` (`id_klasifikasi`, `id_penerima`, `jml_tanggungan`, `p
 (43, 'CPB~006', 50, 25, 50, 25, 100),
 (44, 'CPB~007', 50, 50, 50, 50, 50),
 (45, 'CPB~008', 25, 25, 25, 25, 75),
-(46, 'CPB~009', 75, 25, 75, 75, 50),
 (47, 'CPB~010', 25, 100, 100, 100, 25),
 (48, 'CPB~011', 50, 50, 50, 50, 75),
 (49, 'CPB~012', 25, 75, 75, 50, 25),
@@ -127,17 +126,17 @@ INSERT INTO `klasifikasi` (`id_klasifikasi`, `id_penerima`, `jml_tanggungan`, `p
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kriteria`
+-- Table structure for table `kriteria`
 --
 
 CREATE TABLE `kriteria` (
-  `id_kriteria` int(5) NOT NULL,
+  `id_kriteria` int NOT NULL,
   `namakriteria` varchar(100) NOT NULL,
   `atribut` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `kriteria`
+-- Dumping data for table `kriteria`
 --
 
 INSERT INTO `kriteria` (`id_kriteria`, `namakriteria`, `atribut`) VALUES
@@ -150,17 +149,17 @@ INSERT INTO `kriteria` (`id_kriteria`, `namakriteria`, `atribut`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penerima`
+-- Table structure for table `penerima`
 --
 
 CREATE TABLE `penerima` (
   `id_penerima` varchar(10) NOT NULL,
   `nama_penerima` varchar(100) DEFAULT NULL,
-  `asal` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `asal` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `penerima`
+-- Dumping data for table `penerima`
 --
 
 INSERT INTO `penerima` (`id_penerima`, `nama_penerima`, `asal`) VALUES
@@ -172,7 +171,6 @@ INSERT INTO `penerima` (`id_penerima`, `nama_penerima`, `asal`) VALUES
 ('CPB~006', 'Ijat', 'Teluk Betung Timur'),
 ('CPB~007', 'Bung', 'Way Kandis'),
 ('CPB~008', 'Ipin', 'Way Halim'),
-('CPB~009', 'Upin', 'Natar'),
 ('CPB~010', 'Ehsan', 'Teluk Betung Timur'),
 ('CPB~011', 'Jarjit', 'Sekarame'),
 ('CPB~012', 'Bunga', 'Bandar Lampung'),
@@ -191,62 +189,62 @@ INSERT INTO `penerima` (`id_penerima`, `nama_penerima`, `asal`) VALUES
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indeks untuk tabel `himpunan`
+-- Indexes for table `himpunan`
 --
 ALTER TABLE `himpunan`
   ADD PRIMARY KEY (`id_himpunan`);
 
 --
--- Indeks untuk tabel `klasifikasi`
+-- Indexes for table `klasifikasi`
 --
 ALTER TABLE `klasifikasi`
   ADD PRIMARY KEY (`id_klasifikasi`);
 
 --
--- Indeks untuk tabel `kriteria`
+-- Indexes for table `kriteria`
 --
 ALTER TABLE `kriteria`
   ADD PRIMARY KEY (`id_kriteria`);
 
 --
--- Indeks untuk tabel `penerima`
+-- Indexes for table `penerima`
 --
 ALTER TABLE `penerima`
   ADD PRIMARY KEY (`id_penerima`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `himpunan`
+-- AUTO_INCREMENT for table `himpunan`
 --
 ALTER TABLE `himpunan`
-  MODIFY `id_himpunan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id_himpunan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT untuk tabel `klasifikasi`
+-- AUTO_INCREMENT for table `klasifikasi`
 --
 ALTER TABLE `klasifikasi`
-  MODIFY `id_klasifikasi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id_klasifikasi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
--- AUTO_INCREMENT untuk tabel `kriteria`
+-- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `id_kriteria` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kriteria` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

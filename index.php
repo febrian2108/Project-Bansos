@@ -1,83 +1,111 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<link rel="stylesheet" href="images/style.css" type="text/css" />
-
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sistem Bantuan Sosial - Login</title>
+	
+	<!-- Modern Styles -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/brain-theme.css">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="css/font/css">
-
-	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="css/modern-styles.css">
+	
+	<!-- Scripts -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top bg-success" role="navigation">
-        <div>
-            <div class="navbar-header">
-                
-
-                <ul class="nav navbar-nav navbar-left-custom">
-                    <li class="user dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">
-                        
-                            <span>Seleksi Pemberian Bantuan Kepada Masyarakat Kurang Mampu</span>
-                            
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-	<div id="page" align="center">
-		<!-- <div id="header">
-			<div id="companyname" align="left">Aplikasi Pemberian Beasiswa</div>
-			<div align="right" class="links_menu" id="menu"> </div>
-		</div> -->
-
-
-			<!-- Login wrapper -->
-			<div class="login-wrapper">
-<?php
-//kode php ini kita gunakan untuk menampilkan pesan error
-if (!empty($_GET['error'])) {
-	if ($_GET['error'] == 4) {
-		echo "<font color=red><h5>Username dan Password tidak terdaftar!</h5></font>";
-	}
-}
-?>
-				<form name="login" action="otentikasi.php" role="form" method="post">
-					<div class="panel panel-default bg-success">
-						<div class="panel-heading bg-success"><h6 class="panel-title"><i class="fa fa-user"></i>Login</h6></div>
-						<div class="panel-body">
-							<div class="form-group has-feedback" align="left">
-								<label>Username</label>
-								<input type="text" class="form-control" name="username" placeholder="Username..." required>
-								<i class="fa fa-user form-control-feedback"></i>
-							</div>
-
-							<div class="form-group has-feedback" align="left">
-								<label>Password</label>
-								<input type="password" class="form-control" name="password" placeholder="Password..." required>
-								<i class="fa fa-lock form-control-feedback"></i>
-							</div>
-
-							<div class="row form-actions">
-								<div class="col-xs-6">									
-								</div>
-
-								<div class="col-xs-6">
-									<button type="submit" class="btn btn-default pull-right"><i class="fa fa-sign-in"></i>Sign in</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
+	<div class="login-wrapper">
+		<div class="login-container">
+			<div class="login-header">
+				<div class="login-logo">
+					<i class="fa fa-heart"></i>
+				</div>
+				<h1 class="login-title">Sistem Bantuan Sosial</h1>
+				<p class="login-subtitle">Silakan masuk untuk mengakses dashboard admin</p>
 			</div>
 
-<!-- Footer -->
-<?php 
-// include "/admin/footer.php"; 
-?>
+			<?php
+			//kode php ini kita gunakan untuk menampilkan pesan error
+			if (!empty($_GET['error'])) {
+				if ($_GET['error'] == 4) {
+					echo '<div class="alert alert-error">
+							<i class="fa fa-exclamation-triangle"></i>
+							Username dan Password tidak terdaftar!
+						  </div>';
+				}
+			}
+			?>
+
+			<form name="login" action="otentikasi.php" method="post" id="loginForm">
+				<div class="form-group">
+					<label for="username" class="form-label">
+						<i class="fa fa-user"></i> Username
+					</label>
+					<input type="text" 
+						   class="form-control" 
+						   id="username"
+						   name="username" 
+						   placeholder="Masukkan username Anda..." 
+						   required>
+				</div>
+
+				<div class="form-group">
+					<label for="password" class="form-label">
+						<i class="fa fa-lock"></i> Password
+					</label>
+					<input type="password" 
+						   class="form-control" 
+						   id="password"
+						   name="password" 
+						   placeholder="Masukkan password Anda..." 
+						   required>
+				</div>
+
+				<button type="submit" class="btn btn-primary btn-full" id="loginBtn">
+					<span class="btn-text">
+						<i class="fa fa-sign-in"></i> Masuk ke Dashboard
+					</span>
+					<span class="loading" style="display: none;"></span>
+				</button>
+			</form>
+
+			<div class="text-center mt-3">
+				<small style="color: #6b7280;">
+					<i class="fa fa-shield"></i> 
+					Sistem Pendukung Keputusan Bantuan Sosial
+				</small>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// Add loading animation on form submit
+		document.getElementById('loginForm').addEventListener('submit', function() {
+			const btn = document.getElementById('loginBtn');
+			const btnText = btn.querySelector('.btn-text');
+			const loading = btn.querySelector('.loading');
+			
+			btnText.style.display = 'none';
+			loading.style.display = 'inline-block';
+			btn.disabled = true;
+		});
+
+		// Add focus animations
+		document.querySelectorAll('.form-control').forEach(input => {
+			input.addEventListener('focus', function() {
+				this.parentElement.style.transform = 'translateY(-2px)';
+			});
+			
+			input.addEventListener('blur', function() {
+				this.parentElement.style.transform = 'translateY(0)';
+			});
+		});
+
+		// Add entrance animation
+		window.addEventListener('load', function() {
+			document.querySelector('.login-container').classList.add('fade-in');
+		});
+	</script>
+</body>
+</html>

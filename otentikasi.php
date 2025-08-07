@@ -29,6 +29,6 @@ if (mysqli_num_rows($loginadmin) == 1) {
 	header('location:admin/index.php');
 } else {
 	//kalau username ataupun password tidak terdaftar di database
-	header('location:calon_penerima.php?error=4');
+	header('location:index.php?error=4');
 }
 ?>
